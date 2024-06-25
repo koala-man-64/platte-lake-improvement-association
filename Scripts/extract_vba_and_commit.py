@@ -22,15 +22,9 @@ def run_git_command(command, cwd=None):
         print(result.stderr.decode())
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Extract VBA macros from an Excel file and commit to GitHub.")
-    parser.add_argument('file_path', help="Path to the Excel file")
-    parser.add_argument('output_dir', help="Path to the output directory")
-    parser.add_argument('commit_message', help="Commit message for the changes")
-
-    args = parser.parse_args()
-    file_path = args.file_path
-    output_dir = args.output_dir
-    commit_message = args.commit_message
+    excel_path = os.getenv('FILE_PATH')
+    output_dir = os.getenv('OUTPUT_DIR')
+    commit_message = os.getenv('OUTPUT_DIR')
 
     extract_vba_code(file_path, output_dir)
 
