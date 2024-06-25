@@ -6,10 +6,10 @@ on:
       - '*.xlsm'
   workflow_dispatch:
     inputs:
-      github_file_url:
-        description: 'URL to the Excel file in GitHub'
+      file_path:
+        description: 'Path to the Excel file in the repository'
         required: true
-        default: 'https://github.com/koala-man-64/platte-lake-improvement-association/raw/main/03-13-24%20PRW%20PLIA%20Dist%2003-21-24%20153pm.xlsm'
+        default: '03-13-24 PRW PLIA Dist 03-21-24 153pm.xlsm'
       output_dir:
         description: 'Path to the output directory'
         required: false
@@ -36,7 +36,7 @@ jobs:
 
       - name: Run VBA extraction script
         env:
-          GITHUB_FILE_URL: ${{ github.event.inputs.github_file_url }}
+          FILE_PATH: ${{ github.event.inputs.file_path }}
           OUTPUT_DIR: ${{ github.event.inputs.output_dir }}
         run: |
-          python extract_vba.py
+          python scripts/extract_vba.py
