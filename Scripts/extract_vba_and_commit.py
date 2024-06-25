@@ -15,25 +15,30 @@ def extract_vba_code(excel_path, output_dir):
                 f.write(vba_code)
     vbaparser.close()
 
-def run_git_command(command, cwd=None):
-    result = subprocess.run(command, cwd=cwd, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    print(result.stdout.decode())
-    if result.stderr:
-        print(result.stderr.decode())
+def commit_and_push_changes(repo, output_dir, commit_message):
+    contents = repo.get_contents(output_dir, ref="main")
+    for content_file in contents:
+        repo.delete_file(content_file.path, "cleanup old files", content_file.sha, branch="main")
+    
+    for root, dirs, files in os.walk(output_dir):
+        for file_name in files:
+            file_path = os.path.join(root, file_name)
+            with open(file_path, 'r', encoding='utf-8') as file:
+                content = file.read()
+                git_file_path = os.path.relpath(file_path, start=output_dir)
+                repo.create_file(f"{output_dir}/{git_file_path}", commit_message, content, branch="main")
 
 if __name__ == "__main__":
     file_path = os.getenv('FILE_PATH')
     output_dir = os.getenv('OUTPUT_DIR')
-    commit_message = os.getenv('OUTPUT_DIR')
-
+    commit_message = os.getenv('COMMIT_MESSAGE')
+    github_token = os.getenv('GITHUB_TOKEN')
     extract_vba_code(file_path, output_dir)
 
-    # Stage the changes
-    run_git_command(f'git add {output_dir}')
-    
-    # Commit the changes
-    run_git_command(f'git commit -m "{commit_message}"')
-    
-    # Push the changes
-    run_git_command('git push')
+    # Authenticate to GitHub
+    g = Github(github_token)
+    repo = g.get_repo(repo_name)
+
+    # Commit and push changes
+    commit_and_push_changes(repo, output_dir, commit_message)
 
