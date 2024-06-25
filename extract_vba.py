@@ -1,13 +1,5 @@
 import os
-import requests
 import win32com.client
-
-def download_file_from_github(url, local_path):
-    response = requests.get(url)
-    response.raise_for_status()
-    
-    with open(local_path, 'wb') as f:
-        f.write(response.content)
 
 def extract_vba_code(excel_path, output_dir):
     excel = win32com.client.Dispatch("Excel.Application")
@@ -29,12 +21,8 @@ def extract_vba_code(excel_path, output_dir):
     excel.Quit()
 
 if __name__ == "__main__":
-    github_file_url = os.getenv('GITHUB_FILE_URL')
-    local_excel_path = 'downloaded_excel_file.xlsm'
-    output_dir = os.getenv('OUTPUT_DIR', 'default_path_to_output_directory')
-    
-    # Download the Excel file from GitHub
-    download_file_from_github(github_file_url, local_excel_path)
+    file_path = os.getenv('FILE_PATH')
+    output_dir = os.getenv('OUTPUT_DIR', 'output_directory')  # Default path to the directory
     
     # Extract VBA code
-    extract_vba_code(local_excel_path, output_dir)
+    extract_vba_code(file_path, output_dir)
