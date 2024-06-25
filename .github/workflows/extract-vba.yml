@@ -33,6 +33,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pywin32
           pip install requests
+          pip install oletools
 
       - name: Run VBA extraction script
         env:
