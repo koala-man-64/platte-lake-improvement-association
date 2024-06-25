@@ -22,7 +22,7 @@ def run_git_command(command, cwd=None):
         print(result.stderr.decode())
 
 if __name__ == "__main__":
-    excel_path = os.getenv('FILE_PATH')
+    file_path = os.getenv('FILE_PATH')
     output_dir = os.getenv('OUTPUT_DIR')
     commit_message = os.getenv('OUTPUT_DIR')
 
