@@ -45,4 +45,4 @@ jobs:
           OUTPUT_DIR: ${{ github.event.inputs.output_dir }}
           COMMIT_MESSAGE: ${{ github.event.inputs.commit_message }}
         run: |
-          python scripts/extract_vba_and_commit.py $FILE_PATH $OUTPUT_DIR "$COMMIT_MESSAGE"
+          python Scripts/extract_vba_and_commit.py $FILE_PATH $OUTPUT_DIR "$COMMIT_MESSAGE"
