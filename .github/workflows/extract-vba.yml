@@ -1,9 +1,7 @@
 name: Extract VBA Macros
 
 on:
-  push:
-    paths:
-      - '*.xlsm'
+  workflow_dispatch:
 
 jobs:
   extract_vba:
@@ -25,4 +23,4 @@ jobs:
 
       - name: Run VBA extraction script
         run: |
-          python ../extract_vba.py
+          python extract_vba.py
