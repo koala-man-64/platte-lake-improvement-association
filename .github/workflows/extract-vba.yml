@@ -38,4 +38,4 @@ jobs:
           GITHUB_FILE_URL: ${{ github.event.inputs.github_file_url }}
           OUTPUT_DIR: ${{ github.event.inputs.output_dir }}
         run: |
-          python extract_vba.py
+          python ../extract_vba.py
