@@ -1,7 +1,18 @@
 name: Extract VBA Macros
 
 on:
+  push:
+    paths:
+      - '*.xlsm'
   workflow_dispatch:
+    inputs:
+      github_file_url:
+        description: 'URL to the Excel file in GitHub'
+        required: true
+      output_dir:
+        description: 'Path to the output directory'
+        required: false
+        default: 'default_path_to_output_directory'
 
 jobs:
   extract_vba:
@@ -20,7 +31,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pywin32
+          pip install requests
 
       - name: Run VBA extraction script
+        env:
+          GITHUB_FILE_URL: ${{ github.event.inputs.github_file_url }}
+          OUTPUT_DIR: ${{ github.event.inputs.output_dir }}
         run: |
           python extract_vba.py
