@@ -9,7 +9,7 @@ on:
       github_file_url:
         description: 'URL to the Excel file in GitHub'
         required: true
-        default: 'https://github.com/koala-man-64/platte-lake-improvement-association/blob/main/03-13-24%20PRW%20PLIA%20Dist%2003-21-24%20153pm.xlsm'
+        default: 'https://github.com/koala-man-64/platte-lake-improvement-association/raw/main/03-13-24%20PRW%20PLIA%20Dist%2003-21-24%20153pm.xlsm'
       output_dir:
         description: 'Path to the output directory'
         required: false
