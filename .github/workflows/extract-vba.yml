@@ -25,4 +25,4 @@ jobs:
 
       - name: Run VBA extraction script
         run: |
-          python extract_vba.py
+          python ../extract_vba.py
