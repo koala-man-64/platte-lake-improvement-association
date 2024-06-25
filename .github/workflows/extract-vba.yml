@@ -39,4 +39,4 @@ jobs:
           FILE_PATH: ${{ github.event.inputs.file_path }}
           OUTPUT_DIR: ${{ github.event.inputs.output_dir }}
         run: |
-          python scripts/extract_vba.py
+          python extract_vba.py
