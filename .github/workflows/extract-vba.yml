@@ -38,7 +38,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install oletools
-          pip install aiohttp==3.9.0b0
+          pip install aiohttp==3.8.2
           pip install github
           
 
