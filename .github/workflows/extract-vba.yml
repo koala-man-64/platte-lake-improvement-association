@@ -39,7 +39,7 @@ jobs:
           python -m pip install --upgrade
           pip install oletools
           pip install --upgrade setuptools
-          pip install github
+          pip install PyGithub
           
           
 
