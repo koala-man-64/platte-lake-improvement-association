@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     # Authenticate to GitHub
     g = Github(github_token)
-    repo = g.get_repo(repo_name)
+    repo = g.get_repo('platte-lake-improvement-association')
 
     # Commit and push changes
     commit_and_push_changes(repo, output_dir, commit_message)
