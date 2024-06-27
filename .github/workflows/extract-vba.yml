@@ -36,9 +36,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install
+          python -m pip install --upgrade
           pip install oletools
-          pip install github
+          pip install git+https://github.com/VarMonke/GitHub-API-Wrapper.git
           
 
       - name: Run VBA extraction script
