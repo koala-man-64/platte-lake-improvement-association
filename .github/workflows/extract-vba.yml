@@ -15,9 +15,9 @@ on:
         required: false
         default: 'Extracted Scripts'
       commit_message:
-          description: 'Commit message for the changes'
-          required: true
-          default: 'Extracted VBA macros'
+        description: 'Commit message for the changes'
+        required: true
+        default: 'Extracted VBA macros'
 
 jobs:
   extract_vba:
@@ -44,5 +44,6 @@ jobs:
           FILE_PATH: ${{ github.event.inputs.file_path }}
           OUTPUT_DIR: ${{ github.event.inputs.output_dir }}
           COMMIT_MESSAGE: ${{ github.event.inputs.commit_message }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python Scripts/extract_vba_and_commit.py $FILE_PATH $OUTPUT_DIR "$COMMIT_MESSAGE"
+          python Scripts/extract_vba_and_commit.py $FILE_PATH $OUTPUT_DIR "$COMMIT_MESSAGE" 
