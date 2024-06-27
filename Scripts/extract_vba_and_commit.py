@@ -1,6 +1,7 @@
 import os
 import argparse
 import subprocess
+from github import Github
 from oletools.olevba import VBA_Parser
 
 def extract_vba_code(excel_path, output_dir):
