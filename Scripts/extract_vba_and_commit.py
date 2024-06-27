@@ -12,9 +12,11 @@ def extract_vba_code(excel_path, output_dir):
         for (filename, stream_path, vba_filename, vba_code) in vbaparser.extract_all_macros():
             module_name = os.path.splitext(os.path.basename(vba_filename))[0]
             output_file = os.path.join(output_dir, f"{module_name}.vba")
+            cleaned_code = "\n".join([line for line in vba_code.splitlines() if line.strip() != ""])
             with open(output_file, 'w', encoding='utf-8') as f:
-                f.write(vba_code)
+                f.write(cleaned_code)
     vbaparser.close()
+
 
 def commit_and_push_changes(repo, output_dir, commit_message):
     contents = repo.get_contents(output_dir, ref="main")
@@ -34,11 +36,14 @@ if __name__ == "__main__":
     output_dir = os.getenv('OUTPUT_DIR')
     commit_message = os.getenv('COMMIT_MESSAGE')
     github_token = os.getenv('GITHUB_TOKEN')
-    extract_vba_code(file_path, output_dir)
 
-    # Authenticate to GitHub
+    # Authenticate to GitHub     
+    repo_name = 'koala-man-64/platte-lake-improvement-association'
     g = Github(github_token)
-    repo = g.get_repo('koala-man-64/platte-lake-improvement-association')
+    repo = g.get_repo(repo_name)
+    
+    # Extract VBA macros
+    extract_vba_code(file_path, output_dir)
 
     # Commit and push changes
     commit_and_push_changes(repo, output_dir, commit_message)
